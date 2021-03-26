@@ -7,7 +7,7 @@ insertMoney takes an amount in parameter to add money in the coffee machine.
 getCoffee takes a coffee type in parameter and dispends the selected coffee
 only if the inserted amount is greater or equal than the price of the coffee!
 */
-
+let acept = [];
 let coffeeMachine = {
     brand: "Super Coffee",
     prices: {
@@ -16,10 +16,22 @@ let coffeeMachine = {
       flatWhite: 3.0,
     },
     insertedAmount: 0,
-    insertMoney: function (amount) {},
-    getCoffee: function (coffee) {},
+    insertMoney: function (amount) {     
+      acept = [];
+       for (const key in this.prices) {
+        if( amount >=  this.prices[key] ){
+          acept.push(key)
+        }
+      }  
+    },
+    getCoffee: function (coffee) { if (acept.includes( coffee   )) {
+                                    return `Please take your ${coffee}`
+                                  }else{
+                                    return `Sorry you don't have enough money for a ${coffee}`
+                                    }  
+                                 },
   };
-  
+
   /*
   DO NOT EDIT ANYTHING BELOW THIS LINE
   */

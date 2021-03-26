@@ -7,6 +7,14 @@ const studentGrades = {
     george: 17,
     abdul: 19,
   };
+
+
+for (const key in studentGrades) {
+  if(studentGrades[key] > 18 ){
+    console.log(`${key}: ${studentGrades[key]}`);
+  }
+ 
+}
   
   // Prints
   // TOM - 20

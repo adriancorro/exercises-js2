@@ -60,12 +60,18 @@ let restaurant1 = {
     restaurants: restaurants,
     findAvailableRestaurants: function (numberOfPeople) {
       // Complete here
+      return restaurants.map(p => { if( (p.totalSeats -  p.numberOfCustomers) >= numberOfPeople ){ return p.name }  }  )
     },
     findRestaurantServingDish: function (dishName) {
       // Complete here
+      return restaurants.map( p => { if(p.menu.includes(dishName )){ return  p.name }   }   )
     },
     countNumberOfRestaurantsInArea: function (area) {
       // Complete here
+      let validator =  restaurants.map( p=>   p.address.area == area   ) 
+
+      return validator.filter( p => p == true).length   
+       
     },
   };
   

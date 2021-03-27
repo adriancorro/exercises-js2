@@ -20,7 +20,8 @@ let coffeeMachine = {
       acept = [];
        for (const key in this.prices) {
         if( amount >=  this.prices[key] ){
-          acept.push(key)
+          // si el monto 2.4 es mayor  this.prices[key] 2.4,  1.5,  3.0
+          acept.push(key)   // only push 2.4 y  1.5   para comparar
         }
       }  
     },

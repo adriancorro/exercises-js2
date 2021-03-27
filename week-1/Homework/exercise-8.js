@@ -99,5 +99,43 @@ var mentors = [
 
 ];
 
+
 //YOUR CODE HERE
+
+1//
+mentors.forEach( p => { if(p.job.city == "Barcelona" ) {  console.log(`Hola, mi nombre es ${p.firstName} ${p.lastName}. Trabajo en ${p.job.city} y conozco ${p.skills}"`) }}   )
+
+2//
+mentors.forEach( p => { if(p.job.city == "Barcelona" ) { p.skills.push("SQL"); p.class = "Jun1" ;  console.log(`Hola, mi nombre es ${p.firstName} ${p.lastName}. Trabajo en ${p.job.city} y conozco ${p.skills} mi class es ${p.class}`) }}   )
+
+3// 
+console.log("3:")
+function addSkillPrueba(p){
+ return  this.skills.push(p)
+}
+
+//  Agregamos una nueva propiedad al objeto literal con cada iteracion pero p.addSkillPropiedad nos da undefined console.log(typeof p.addSkillPropiedad )
+// trasformamos la propiedad que nos da undefined en una funcion  p.addSkillPropiedad = addSkillPrueba;
+// p.addSkillPropiedad("CSS")  asiganmos valor a la funcion creada que a su vez es una propiedad
+mentors.map( p => { p.addSkillPropiedad = addSkillPrueba; p.addSkillPropiedad("CSS");  console.log( p.skills ) }   )
+
+4// 
+console.log("4:")
+
+function addSkillF(ObjectLiteral,newSkill){
+  //your code here
+  ObjectLiteral.forEach( p => {p.addSkill = addSkillPrueba;  p.addSkill(newSkill) ; console.log( p.skills ) } )
+  
+}
+addSkillF(mentors,"Angular");
+
+5// 
+console.log("5:")
+
+function remove(ObjectLiteral, p2 ){
+  ObjectLiteral.map( p => { p.skills.splice(p.skills.indexOf(p2),1); console.log( p.skills ) ; return p  } )
+  
+}
+
+remove( mentors, 'Angular')
 

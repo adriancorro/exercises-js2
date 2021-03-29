@@ -41,18 +41,40 @@ var product2 = {
   price: 9.99,
   stock: 2
 };
+var product3 = {
+  id: 3,
+  name: "pla5",
+  price: 400,
+  stock: 56
+};
+var product4 = {
+  id: 4,
+  name: "Swipe",
+  price: 56.66,
+  stock: 45
+};
 
 products.push(product1);
 products.push(product2);
+products.push(product3);
+products.push(product4);
 
 var shoppingCart = {
   totalPrice: 0,
   selectedProducts: []
+   
 };
 
-function addToShoppingCart(id){
+ function addToShoppingCart(id){
+  /*  Usamos find porq devuelve un valor
+   no usamos filter porque vevuelve un array entonces tendriamos que colocar filtramos[0] ejemplo shoppingCart.selectedProducts.push(filtramos[0])   shoppingCart.totalPrice =  shoppingCart.totalPrice + filtramos[0].price  
+  */
+  let filtramos =  products.find( producto =>  producto.id == id)
+  shoppingCart.selectedProducts.push(filtramos)
+  shoppingCart.totalPrice =  shoppingCart.totalPrice + filtramos.price
+ 
 
-}
+ }
 
 function removeFromShoppingCart(id){
 
@@ -64,6 +86,7 @@ function shop(){
 
 //results
 addToShoppingCart(1);
+
 console.log("Step 1");
 console.log("Total Price = " + shoppingCart.totalPrice);
 console.log("Number of Elements = " + shoppingCart.selectedProducts.length);

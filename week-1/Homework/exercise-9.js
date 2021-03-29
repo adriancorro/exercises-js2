@@ -66,18 +66,20 @@ var shoppingCart = {
 };
 
  function addToShoppingCart(id){
-  /*  Usamos find porq devuelve un valor
-   no usamos filter porque vevuelve un array entonces tendriamos que colocar filtramos[0] ejemplo shoppingCart.selectedProducts.push(filtramos[0])   shoppingCart.totalPrice =  shoppingCart.totalPrice + filtramos[0].price  
+  /*  -Usamos find porq devuelve un valor
+      -No usamos filter porque devuelve un array entonces tendriamos que colocar filtramos[0] ejemplo shoppingCart.selectedProducts.push(filtramos[0])   shoppingCart.totalPrice =  shoppingCart.totalPrice + filtramos[0].price  
   */
   let filtramos =  products.find( producto =>  producto.id == id)
   shoppingCart.selectedProducts.push(filtramos)
   shoppingCart.totalPrice =  shoppingCart.totalPrice + filtramos.price
- 
 
  }
 
 function removeFromShoppingCart(id){
-
+  shoppingCart.selectedProducts = shoppingCart.selectedProducts.filter(producto=>{if(producto.id !== id){return producto}})
+  
+  let totalPrice =  shoppingCart.selectedProducts.find( product => product.price )
+  shoppingCart.totalPrice = shoppingCart.totalPrice  -   totalPrice.price
 }
 
 function shop(){
@@ -108,6 +110,13 @@ console.log("Number of Elements = " + shoppingCart.selectedProducts.length);
 console.log("Name of Elements = " + shoppingCart.selectedProducts.map(p=>p.name));
 shop();
 console.log("Step 5");
+console.log("Total Price = " + shoppingCart.totalPrice);
+console.log("Number of Elements = " + shoppingCart.selectedProducts.length);
+console.log("Name of Elements = " + shoppingCart.selectedProducts.map(p=>p.name));
+
+removeFromShoppingCart(1);
+
+console.log("Step 6- Se agrego removeFromShoppingCart(1) en la linea codigo 117");
 console.log("Total Price = " + shoppingCart.totalPrice);
 console.log("Number of Elements = " + shoppingCart.selectedProducts.length);
 console.log("Name of Elements = " + shoppingCart.selectedProducts.map(p=>p.name));

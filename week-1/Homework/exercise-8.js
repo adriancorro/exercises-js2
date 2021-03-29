@@ -168,7 +168,8 @@ function mentorWithMoreSkills (mentors){
     //creamos el método de objeto
     mentors.forEach ( mentor => {  
       mentor.addStudentLikes =  function(){
-              this.studentLikes ++   //studentLikes = studentLikes + 1
+              this.studentLikes ++   // es lo mismo que  this.studentLikes = this.studentLikes + 1;
+              
       } 
       }   )
       mentors.forEach(mentor => console.log( mentor.addStudentLikes ) )
@@ -176,11 +177,11 @@ function mentorWithMoreSkills (mentors){
 
  //     8. Create a function that adds a student like to all mentors in the array
     console.log("8:") 
-          // llamamos al metodo objeto creado en el paso 7
+          // llamamos al metodo objeto creado en el paso 7 for Each
       function addStudentLikesAll(mentors){
         //your code here
-        mentors.forEach(mentor =>   
-          mentor.addStudentLikes()
+         mentors.forEach(mentor =>   
+         mentor.addStudentLikes()
           )
         
       }

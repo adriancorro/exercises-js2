@@ -40,11 +40,11 @@ var product2 = {
   name: "Watch Rocker",
   price: 9.99,
   stock: 2
-};
+}; 
 var product3 = {
   id: 3,
   name: "pla5",
-  price: 400,
+  price: 10,
   stock: 56
 };
 var product4 = {
@@ -65,58 +65,117 @@ var shoppingCart = {
    
 };
 
+ 
+// creamos propiedad substractStock que es igual a una funcion por cada uno 
+products.forEach( product => product.substractStock = function(){ this.stock -- } )
+// creamos la funcion que permita restar el Stock cada vez que la llamemos
+// el parametro productos tiene que ser igual al array con todos los objetos literales luego se hace forEach (por cada uno)
+let allSubstractStock = productos => productos.forEach(producto => producto.substractStock())
+
+
+products.forEach( product => product.addStock = function(){ this.stock ++} )
+let allAddStock = productos => productos.forEach(producto => producto.addStock())
+
+
  function addToShoppingCart(id){
   /*  -Usamos find porq devuelve un valor
       -No usamos filter porque devuelve un array entonces tendriamos que colocar filtramos[0] ejemplo shoppingCart.selectedProducts.push(filtramos[0])   shoppingCart.totalPrice =  shoppingCart.totalPrice + filtramos[0].price  
   */
   let filtramos =  products.find( producto =>  producto.id == id)
-  shoppingCart.selectedProducts.push(filtramos)
-  shoppingCart.totalPrice =  shoppingCart.totalPrice + filtramos.price
+  
+  let filtramos2 =  products.filter( producto =>  producto.id == id)
 
+  filtramos2.forEach( producto =>  { if(producto.stock == 0){ 
+                                      console.log( `----------NO se puede agregar el producto ${producto.name} porque su stock esta en ${producto.stock} ----------------------- `)
+                                    }else{
+                                      allSubstractStock(filtramos2)
+                                      shoppingCart.selectedProducts.push(filtramos)
+                                      shoppingCart.totalPrice =  shoppingCart.totalPrice + filtramos.price
+                                    }  
+    })
+
+ 
+    
  }
 
+ 
+
 function removeFromShoppingCart(id){
-  shoppingCart.selectedProducts = shoppingCart.selectedProducts.filter(producto=>{if(producto.id !== id){return producto}})
+  let filtro =  shoppingCart.selectedProducts.filter(producto=>{if(producto.id == id){return producto}})
+  filtro.pop();
+
+  let filtro2 =  shoppingCart.selectedProducts.filter(producto=>{if(producto.id !== id){return producto}})
+
+  let array3 = filtro.concat(filtro2);
+ 
+  shoppingCart.selectedProducts = array3;
+
   
-  let totalPrice =  shoppingCart.selectedProducts.find( product => product.price )
-  shoppingCart.totalPrice = shoppingCart.totalPrice  -   totalPrice.price
+
+ // console.log(shoppingCart.selectedProducts )
+  let add = products.filter(producto=> producto.id == id)
+  allAddStock(add)
+
+  let totalPrice =  products.find( producto => producto.id == id )
+  // del total del precio restale el resultado actual del return del find precio actual
+  
+
+  if ( shoppingCart.totalPrice > 0.1 ){
+    shoppingCart.totalPrice = shoppingCart.totalPrice  -   totalPrice.price
+  }else{
+    "no"
+  }
+     
+ 
+  
+ 
 }
 
 function shop(){
+  
+  if(shoppingCart.totalPrice > 0){
+    shoppingCart.selectedProducts.forEach(product =>  product.stock = product.stock - 1 ) 
+  } else if(shoppingCart.totalPrice < 0){
+     console.log( "no")
+  }
+  
+
+    shoppingCart.selectedProducts = []
+    shoppingCart.totalPrice = 0
 
 }
 
 //results
-addToShoppingCart(1);
+ addToShoppingCart(1);
 
 console.log("Step 1");
 console.log("Total Price = " + shoppingCart.totalPrice);
 console.log("Number of Elements = " + shoppingCart.selectedProducts.length);
 console.log("Name of Elements = " + shoppingCart.selectedProducts.map(p=>p.name));
-addToShoppingCart(2);
+console.log( products.map (p => console.log (`d  ${p.name} ${p.stock} ` ) )  )
+ addToShoppingCart(2);
+console.log( products.map (p => console.log (`d  ${p.name} ${p.stock} ` ) )  )
 console.log("Step 2");
 console.log("Total Price = " + shoppingCart.totalPrice);
 console.log("Number of Elements = " + shoppingCart.selectedProducts.length);
 console.log("Name of Elements = " + shoppingCart.selectedProducts.map(p=>p.name));
-addToShoppingCart(4);
+ addToShoppingCart(4);
 console.log("Step 3");
 console.log("Total Price = " + shoppingCart.totalPrice);
 console.log("Number of Elements = " + shoppingCart.selectedProducts.length);
 console.log("Name of Elements = " + shoppingCart.selectedProducts.map(p=>p.name));
+
 removeFromShoppingCart(2);
+
+
 console.log("Step 4");
 console.log("Total Price = " + shoppingCart.totalPrice);
 console.log("Number of Elements = " + shoppingCart.selectedProducts.length);
 console.log("Name of Elements = " + shoppingCart.selectedProducts.map(p=>p.name));
+
 shop();
 console.log("Step 5");
 console.log("Total Price = " + shoppingCart.totalPrice);
 console.log("Number of Elements = " + shoppingCart.selectedProducts.length);
 console.log("Name of Elements = " + shoppingCart.selectedProducts.map(p=>p.name));
 
-removeFromShoppingCart(1);
-
-console.log("Step 6- Se agrego removeFromShoppingCart(1) en la linea codigo 117");
-console.log("Total Price = " + shoppingCart.totalPrice);
-console.log("Number of Elements = " + shoppingCart.selectedProducts.length);
-console.log("Name of Elements = " + shoppingCart.selectedProducts.map(p=>p.name));

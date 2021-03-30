@@ -118,7 +118,7 @@ function addSkillPrueba(p){
 
 //  Agregamos una nueva propiedad al objeto literal con cada iteracion pero p.addSkillPropiedad nos da undefined console.log(typeof p.addSkillPropiedad )
 // trasformamos la propiedad que nos da undefined en una funcion  p.addSkillPropiedad = addSkillPrueba;
-// p.addSkillPropiedad("CSS")  asiganmos valor a la funcion creada que a su vez es una propiedad
+// p.addSkillPropiedad("CSS")  asignamos valor a la funcion creada que a su vez es una propiedad
 mentors.map( p => { p.addSkillPropiedad = addSkillPrueba; p.addSkillPropiedad("CSS");  console.log( p.skills ) }   )
 
 //4 

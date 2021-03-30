@@ -66,27 +66,40 @@ var shoppingCart = {
 };
 
  
-// creamos propiedad substractStock que es igual a una funcion por cada uno 
+// creamos un metodo  substractStock y es una propiedad de un objeto (objeto literal products)  que es igual a una funcion por cada uno 
 products.forEach( product => product.substractStock = function(){ this.stock -- } )
 // creamos la funcion que permita restar el Stock cada vez que la llamemos
 // el parametro productos tiene que ser igual al array con todos los objetos literales luego se hace forEach (por cada uno)
+// allSubstractStock permite recibir como parametro el array (que queremos) para luego llamar al metodo creado antes 
 let allSubstractStock = productos => productos.forEach(producto => producto.substractStock())
 
+/*  
+se puede traducir:
+let allSubstractStock = productos => productos.forEach(producto => producto.substractStock())
 
+en:
+function  allSubstractStock (productos){
+     productos.forEach( producto => producto.substractStock())
+ } 
+ */
+// creamos un metodo que permite agregar el profucto al stock si lo removemos del carrito de compra 
+// método addStock es una propiedad de un objeto (objeto literal products) 
 products.forEach( product => product.addStock = function(){ this.stock ++} )
+// allAddStock permite recibir como parametro un array para que:  cada elemeto del array (que queremos) invoque el metodo addStock
 let allAddStock = productos => productos.forEach(producto => producto.addStock())
-
 
  function addToShoppingCart(id){
   /*  -Usamos find porq devuelve un valor
       -No usamos filter porque devuelve un array entonces tendriamos que colocar filtramos[0] ejemplo shoppingCart.selectedProducts.push(filtramos[0])   shoppingCart.totalPrice =  shoppingCart.totalPrice + filtramos[0].price  
   */
+
+     
   let filtramos =  products.find( producto =>  producto.id == id)
   
   let filtramos2 =  products.filter( producto =>  producto.id == id)
 
   filtramos2.forEach( producto =>  { if(producto.stock == 0){ 
-                                      console.log( `----------NO se puede agregar el producto ${producto.name} porque su stock esta en ${producto.stock} ----------------------- `)
+                                      console.log( `______----------NO se puede agregar el producto ${producto.name} porque su stock esta en ${producto.stock} ________----------------------- `)
                                     }else{
                                       allSubstractStock(filtramos2)
                                       shoppingCart.selectedProducts.push(filtramos)
@@ -101,33 +114,32 @@ let allAddStock = productos => productos.forEach(producto => producto.addStock()
  
 
 function removeFromShoppingCart(id){
-  let filtro =  shoppingCart.selectedProducts.filter(producto=>{if(producto.id == id){return producto}})
+
+  // descontamos el total del precio
+  let totalPrice =  shoppingCart.selectedProducts.find( producto => producto.id == id )
+  if ( shoppingCart.totalPrice > 0.1 && totalPrice !== undefined ){
+    shoppingCart.totalPrice = shoppingCart.totalPrice  -   totalPrice.price
+  }else{
+    console.log( "________el carrito esta vacio____________________________________________________________")
+  }
+
+
+  let filtro =  shoppingCart.selectedProducts.filter(producto=>producto.id == id)
+  // eliminamos el ultimo elemento del array que es igual al id pasado como parametro
   filtro.pop();
-
-  let filtro2 =  shoppingCart.selectedProducts.filter(producto=>{if(producto.id !== id){return producto}})
-
+  //filtramos los que no sean iguales al id pasado como parametro
+  let filtro2 =  shoppingCart.selectedProducts.filter(producto=>producto.id !== id)
+  //hacemos concat 
   let array3 = filtro.concat(filtro2);
- 
-  shoppingCart.selectedProducts = array3;
 
-  
+  shoppingCart.selectedProducts = array3;
 
  // console.log(shoppingCart.selectedProducts )
   let add = products.filter(producto=> producto.id == id)
   allAddStock(add)
 
-  let totalPrice =  products.find( producto => producto.id == id )
-  // del total del precio restale el resultado actual del return del find precio actual
   
-
-  if ( shoppingCart.totalPrice > 0.1 ){
-    shoppingCart.totalPrice = shoppingCart.totalPrice  -   totalPrice.price
-  }else{
-    "no"
-  }
      
- 
-  
  
 }
 
@@ -147,19 +159,18 @@ function shop(){
 
 //results
  addToShoppingCart(1);
-
 console.log("Step 1");
 console.log("Total Price = " + shoppingCart.totalPrice);
 console.log("Number of Elements = " + shoppingCart.selectedProducts.length);
 console.log("Name of Elements = " + shoppingCart.selectedProducts.map(p=>p.name));
-console.log( products.map (p => console.log (`d  ${p.name} ${p.stock} ` ) )  )
- addToShoppingCart(2);
-console.log( products.map (p => console.log (`d  ${p.name} ${p.stock} ` ) )  )
+ addToShoppingCart(4);
 console.log("Step 2");
 console.log("Total Price = " + shoppingCart.totalPrice);
 console.log("Number of Elements = " + shoppingCart.selectedProducts.length);
 console.log("Name of Elements = " + shoppingCart.selectedProducts.map(p=>p.name));
- addToShoppingCart(4);
+ 
+ addToShoppingCart(2);
+
 console.log("Step 3");
 console.log("Total Price = " + shoppingCart.totalPrice);
 console.log("Number of Elements = " + shoppingCart.selectedProducts.length);
@@ -167,13 +178,13 @@ console.log("Name of Elements = " + shoppingCart.selectedProducts.map(p=>p.name)
 
 removeFromShoppingCart(2);
 
-
 console.log("Step 4");
 console.log("Total Price = " + shoppingCart.totalPrice);
 console.log("Number of Elements = " + shoppingCart.selectedProducts.length);
 console.log("Name of Elements = " + shoppingCart.selectedProducts.map(p=>p.name));
 
 shop();
+
 console.log("Step 5");
 console.log("Total Price = " + shoppingCart.totalPrice);
 console.log("Number of Elements = " + shoppingCart.selectedProducts.length);

@@ -16,7 +16,7 @@ Write JavaScript below that logs:
 
 */
 
-
+console.log(document.querySelectorAll('p'))
 /*
 Task 2
 ======

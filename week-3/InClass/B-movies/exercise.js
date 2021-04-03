@@ -27,7 +27,7 @@ Create a form anywhere on your page. The form should have
 When the button is clicked
 - The field values should be used to create a new movie object literal
 - The new movie is then added to the list of movies and gets displayed on your page
-TIP: Use the functions you created on tasks 1-3
+TIP: Use the functions you created on tasks 1-3 
 
 ================
 */
@@ -59,7 +59,27 @@ var movies = [
 ];
 
 // create showMovies function
+function showMovies(){
+  movies.forEach( movie =>   {
+      /*   - iterates through the "movies" array and
+    - for each movie, it creates a <p> element with the movie title and director and append it to the #all-movies div.
+    - it sets the innerText of the #movies-number element to the total number of the movies in the array "movies"
+         */
+    const  description  =  `${movie.title} -  ${movie.director}`     
+    const paragraph = document.createElement('p')
+    paragraph.append(description)
+    const allMoviesDiv = document.getElementById('all-movies')
+    allMoviesDiv.appendChild(paragraph)
+  }
+ )
 
+//  const numberMovies = document.getElementById('movies-number') tambien funciona. Importante no colocar # dentro '' 
+ const numberMovies = document.querySelector('#movies-number')
+ numberMovies.innerText = movies.length
+}
+
+
+showMovies() 
 
 // create a new movie object for your favorite movie
 

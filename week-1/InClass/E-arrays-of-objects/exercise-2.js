@@ -38,6 +38,7 @@ let travelDestinations = [destination1, destination2, destination3, destination4
 DO NOT EDIT ANYTHING ABOVE THIS LINE
 WRITE YOUR CODE BELOW
 */
+ 
 
 let destinationNamesWithin500Kms = travelDestinations.filter(  p => p.distanceKms < 500 ).map( p2 => p2.destinationName )  // Complete here
 

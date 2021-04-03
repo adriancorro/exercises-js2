@@ -13,9 +13,17 @@
  *      .....
  * </div>
  */
-function exerciseOne(arrayOfPeople) {
-  let content = document.querySelector("#content");
-}
+ let content = document.querySelector("#content");
+ console.log(content);
+ function exerciseOne(arrayOfPeople) {
+   arrayOfPeople.forEach(persona => {
+     let h1 = document.createElement("h1")
+     h1.append(persona.name);
+     let h2 = document.createElement("h2")
+     h2.append(persona.job);
+     content.append(h1, h2)
+   })
+ }
 
 /**
  *
@@ -24,8 +32,15 @@ function exerciseOne(arrayOfPeople) {
  * All of your HTML should go inside the Div tag with the id "content".
  *
  */
-function exerciseTwo(shopping) {
-  //Write your code in here
+ function exerciseTwo(shopping) {
+  let ul = document.createElement("ul");
+
+  shopping.forEach(item => {
+    let li = document.createElement("li");
+    li.append(item)
+    ul.append(li)
+  })
+  content.append(ul)
 }
 
 /**
@@ -58,7 +73,43 @@ function exerciseTwo(shopping) {
     The end result should look something like this: https://hyf-js2-week1-makeme-ex1-demo.herokuapp.com/
 **/
 function exerciseThree(books) {
-  //Write your code in here
+  let elementH1 =  document.createElement("h1");
+  elementH1.append("Book List")
+  let elementUl = document.createElement("ul");
+  elementUl.style.display = "flex";
+  elementUl.style.listStyle = "none";
+  elementUl.style.margin = "15px" 
+
+  let img1 = src="https://i.ibb.co/qB5WWfg/2.jpg"
+  let img2 = src="https://i.ibb.co/YN1L55T/1.jpg"
+  let img3 = src="https://i.ibb.co/p0wYykH/3.jpg"
+
+  
+
+  let imgArr = [];
+  imgArr.push(img1, img2, img3)
+  console.log(img1)
+  books.forEach((book, index) => {
+    let elementLi = document.createElement("li");
+    elementLi.style.margin = "15px" 
+    elementLi.style.padding = "15px" 
+    let elementP = document.createElement("p");
+    let elementImg = document.createElement("img");
+    elementP.append(`${book.title}-${book.author}`);
+    elementLi.append(elementP, elementImg);
+    elementLi.classList.add('clasLi')
+
+    elementImg.src = imgArr[index]
+    if(book.alreadyRead) {
+      elementLi.style.backgroundColor = "green"
+
+    }else {
+      
+      elementLi.style.backgroundColor = "red"
+    }
+    elementUl.append(elementLi);
+  })
+  content.append(elementH1, elementUl)
 }
 
 //

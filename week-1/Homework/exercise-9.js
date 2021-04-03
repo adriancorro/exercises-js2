@@ -91,7 +91,7 @@ let allAddStock = productos => productos.forEach(producto => producto.addStock()
  function addToShoppingCart(id){
   /*  -Usamos find porq devuelve un valor
       -No usamos filter porque devuelve un array entonces tendriamos que colocar filtramos[0] ejemplo shoppingCart.selectedProducts.push(filtramos[0])   shoppingCart.totalPrice =  shoppingCart.totalPrice + filtramos[0].price  
-  */
+  */ 
 
      
   let filtramos =  products.find( producto =>  producto.id == id)
@@ -120,7 +120,7 @@ function removeFromShoppingCart(id){
   if ( shoppingCart.totalPrice > 0.1 && totalPrice !== undefined ){
     shoppingCart.totalPrice = shoppingCart.totalPrice  -   totalPrice.price
   }else{
-    console.log( "________el carrito esta vacio____________________________________________________________")
+    console.log( "________el carrito esta vacio__________________________________________________________")
   }
 
 

@@ -8,7 +8,7 @@
   <meta name="description" content="Callbacks">
   <meta name="author" content="CodeYourFuture">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-  <style> 
+  <style>
     body {
       padding: 30px;
     }
@@ -17,12 +17,19 @@
 
 <body>
   <div id="main">
+    <form id="new-movie">
+      <input id="titleTextField" type="text" placeholder="Title"/>
+      <input id="directorTextField" type="text" placeholder="Director"/>
+      <input id="typeTextField" type="text" placeholder="Type"/>
+      <input id="haveWatchedTextField" type="text" placeholder="haveWatchedTextField"/>
+      <input id="submitButton" type="submit" value="save"/>
+    </form>
     <div class="jumbotron">
       <h1>My movies</h1>
       <div id="all-movies">
         <p class="alert alert-info">Number of movies: <span id="movies-number"></span></p>
       </div>
-    </div> 
+    </div>
     <script src="exercise.js"></script>
 </body>
 

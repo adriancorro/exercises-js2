@@ -4,7 +4,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>CodeYourFuture - Callbacks</title>
+  <title>Lat/Lon</title>
   <meta name="description" content="Callbacks">
   <meta name="author" content="CodeYourFuture">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -12,14 +12,17 @@
     body {
       padding: 30px;
     }
-  </style> 
+  </style>
 </head>
 
 <body>
   <div id="main">
-    <h1>Change my background color</h1>
-  </div>
-  <script src="exercise.js"></script>
+    <form id="new-movie">
+      <input id="latitudTextField" type="text" placeholder="Latitud"/>
+      <input id="longituTextField" type="text" placeholder="Longitud"/>
+      <input id="submitButton" type="submit" value="get"/>
+    </form>
+    <script src="exercise.js"></script>
 </body>
 
 </html>

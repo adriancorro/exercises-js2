@@ -43,7 +43,7 @@ function inputFocus() {
 */
 
 
-let elementos = document.querySelectorAll(".form-control");
+let elementos = document.querySelectorAll(".form-control"); 
 elementos.forEach( elemento => {elemento.onfocus = inputFocus; elemento.onblur = inputBlur; } )
 
 

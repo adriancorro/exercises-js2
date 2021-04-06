@@ -112,7 +112,7 @@ submitButton.addEventListener('click', event => {
     director: directorTextField.value,
     type: typeTextField.value,
     haveWatched: haveWatchedTextField.value
-  }
+  } 
 
   addMovie(movie)
 })

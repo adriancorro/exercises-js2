@@ -1,16 +1,15 @@
-let i = -1;
-let interval = 0 ;
+let i ;
 function setAlarm() {
 
  clearInterval(i)
  let value = document.querySelector("#alarmSet").value;
- let change = 1000; 
+ let timeInterval = 1000; 
 
 i = setInterval (  () =>  {
-  let time = document.querySelector("#timeRemaining");
-  if( value === 0 ){
-    clearInterval(i)
-    playAlarm()
+    let time = document.querySelector("#timeRemaining");
+    if( value === 0 ){
+      clearInterval(i)
+      playAlarm() 
   }
 
   let min = parseInt(value/60)  < 10  ?  ` 0${ parseInt(  value  / 60) }`    : parseInt (value/60) ;
@@ -20,7 +19,7 @@ i = setInterval (  () =>  {
 
  
   
-}, change);
+}, timeInterval);
 }
 
 let stop2 = document.querySelector("#stop");
